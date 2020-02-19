@@ -1,0 +1,82 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Learning </title>
+	<style type="text/css">
+	  .Colouredbutton{
+	  background-color: yellow;
+	  color: yellow;
+	  text-align: center;
+	  padding: 15px 32px
+	  font-size: 8px;
+	  cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+<h2>
+	Button guessing game
+</h2>
+<form>
+<label>Enter no. of tries</label>
+<input type="number" id = "try">
+	<button type="button" onclick="randomNum()">submit</button>>
+<p id = "randomnum">
+</p>
+</form>
+
+<button class="Colouredbutton" id="1" onclick="changeColor(this)">B1</button>
+<button class="Colouredbutton" id="2" onclick="changeColor(this)">B2</button>
+<button class="Colouredbutton" id="3" onclick="changeColor(this)">B3</button>
+<button class="Colouredbutton" id="4" onclick="changeColor(this)">B4</button>
+<button class="Colouredbutton" id="5" onclick="changeColor(this)">B5</button>
+<p id = "text"></p>
+
+<script>
+	arr = ['B1', 'B2', 'B3', 'B4', 'B5']
+	arr_length = arr.length;
+	for (i=1; i<=arr_length; i++){
+		var rand_val = Math.floor((Math.random() * arr.length));
+		doc = document.getElementById(i);
+		arr_rand = arr[rand_val];
+		doc.innerHTML = arr[rand_val];
+		arr.splice( arr.indexOf(arr_rand), 1 );
+	}
+
+	var loop_val;
+	function randomNum() {
+	loop_val = document.getElementById('try').value;
+		if (loop_val >4) {
+			document.getElementById("randomnum").innerHTML = "You can take 4 tries only";
+		}
+		else {
+			var x = Math.floor((Math.random() * 5) + 1);
+			x = 'B'.concat(x);//global variable
+			document.getElementById("randomnum").innerHTML = x;
+		}
+	}
+
+	var count = 1;
+	function changeColor(event1) {
+		property=event1;
+		console.log(property.innerHTML,document.getElementById("randomnum").innerHTML);
+		if (count <= loop_val){
+			if (document.getElementById("randomnum").innerHTML == property.innerHTML) {
+				property.style.backgroundColor = "green";
+				document.getElementById('text').innerHTML ="You win";
+			}
+			else{
+				property.style.backgroundColor = "red";
+				if (count == loop_val){
+					document.getElementById('text').innerHTML ="You lose";
+				}
+			}
+			count = count + 1;
+		}
+	}
+</script>
+
+</body>
+</html>
